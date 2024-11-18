@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Use your preferred Node version
+          node-version: '19' # Use your preferred Node version
 
       - name: Install dependencies
         run: npm install
@@ -29,3 +29,10 @@ jobs:
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          
+      - name: Wait for server to be ready
+        run: sleep 10
+          
+      - name: Check server health
+        run: curl http://localhost:3000
+  
